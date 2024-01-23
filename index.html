@@ -28,49 +28,58 @@
 </head>
 
 <body>
-
     <div id="root">
-
+        <!-- * Header section -->
         <header class="container-fluid d-flex justify-content-center align-items-center my-2">
             <img src="assets/dom_icon/favicon.ico" alt="icon">
             <h1>boolean</h1>
         </header>
-        <!-- * Main content -->
+
+        <!-- * Main content section -->
         <main class="container">
             <!-- * Title of the to-do list -->
             <h2 class="text-center fs-1">To do list</h2>
 
-            <!--* Container for the task list -->
-            <div id="list-container">
-                <!--* Search form -->
-                <form class="d-flex mb-3" role="search">
-                    <input id="src-input" class="form-control me-1" type="search" placeholder="Search..."
-                        aria-label="Search" v-model="searchTerm"> <!-- Modificato il nome in searchTerm -->
-                    <!--* Search button with an icon -->
-                    <button class="btn bg-cs text-white" type="button"><i
-                            class="fa-solid fa-magnifying-glass"></i></button>
-                </form>
+            <!-- * Search form -->
+            <form id="search-form" class="d-flex mb-3" role="search">
+                <input id="src-input" class="form-control me-1" type="search" placeholder="Search..."
+                    aria-label="Search" v-model="searchTerm">
+                <button class="btn bg-cs text-white" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
 
-                <!--* Task list -->
-                <div class="task-item" v-for="task in tasks" :key="task.id">
+            <!-- * Task list container -->
+            <div id="list-container">
+                <!-- * Task item -->
+                <div class="task-item" v-for="task in filteredTasks" :key="task.id">
+                    <!-- * Checkbox for the task -->
                     <input type="checkbox" class="form-check-input" v-model="task.done">
+                    <!-- * Task content -->
                     <div class="task-content">
                         <span>{{ task.text }}</span>
-                        <span class="delete-task" @click="deleteTask(task.id)"><i
-                                class="fa-solid fa-trash text-white"></i></span>
+                        <!-- * Button to delete the task -->
+                        <button class="delete-task border-0" @click="deleteTask(task.id)">
+                            <i class="fa-solid fa-trash text-white"></i>
+                        </button>
                     </div>
                 </div>
 
-                <!--* New task input and button -->
+                <!-- * New task input and button -->
                 <div class="add-task-container">
                     <input type="text" class="form-control" id="newTaskInput" placeholder="New Task..."
-                        v-model="newTaskText">
-                    <button id="addTaskBtn" class="btn bg-cs text-white" @click="addTask"><i
-                            class="fa-solid fa-plus"></i></button>
+                        v-model="newTaskText" @keyup.enter="addTask">
+                    <button id="addTaskBtn" class="btn bg-cs text-white" @click="addTask">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+
+                <!-- * Message when there are no tasks -->
+                <div v-show="!hasTasks">
+                    <h2 class="text-center fs-2 mt-2">{{ noTasksMessage }}</h2>
                 </div>
             </div>
-        </main>
-    </div>
+
 </body>
+
+
 
 </html>

@@ -7,7 +7,7 @@ form[role="search"] button:hover {
     background-color: #2c7ccd;
 }
 
-.task-item .delete-task:hover {
+#list-container button.delete-task:hover {
     background-color: red;
 }
 
@@ -29,6 +29,7 @@ header img {
 }
 
 /* * Main */
+#search-form,
 #list-container {
     margin: 0 auto;
     max-width: 500px;
