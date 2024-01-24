@@ -33,12 +33,7 @@ const app = createApp({
         },
         //* Computed property to dynamically generate the noTasksMessage based on the search term
         noTasksMessage() {
-            if (this.searchTerm.trim() !== '') {
-                this.dynamicNoTasksMessage = `Non ci sono task disponibili contenenti: "${this.searchTerm}".`;
-                return this.dynamicNoTasksMessage;
-            } else {
-                return this.defaultNoTasksMessage;
-            }
+            return this.searchTerm.trim() !== '' ? `Non ci sono task disponibili contenenti: "${this.searchTerm}".` : this.defaultNoTasksMessage;
         },
     },
     methods: {
